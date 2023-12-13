@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="modurbord.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="..." crossorigin="anonymous">
+    <style>
+        /* Popup container */
+        .popup {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* The actual popup (appears on top) */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #555 transparent;
+        }
+
+        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity:1 ;}
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: #333;
+            padding: 20px;
+            text-align: left;
+            position: relative; 
+        }
+
+        .page-title {
+            font-size: 48px;
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            margin-right: 20px;
+        }
+
+        .menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .sub-menu {
+            list-style: none;
+            padding: 10px; /* setjum padding fyrir dropdown */
+            position: absolute;
+            top: 100%; /* Position the submenu below the header */
+            left: 0;
+            background-color: #333;
+            display: none; /* Hide the submenu by default */
+        }
+
+        .sub-menu li {
+            margin: 5px 0;
+        }
+
+        .sub-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .header:hover .sub-menu {
+            display: block; /* Show the submenu when the header is hovered */
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Style for the text section with larger font size */
+        .text-section {
+            width: 100%;
+            padding: 20px;
+            font-size: 24px; /* Increased the font size for the text further */
+        }
+
+        /* Style for the image section */
+        .image-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Style for images (you can adjust width, height, and other styles as needed) */
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        /* Accordion styles */
+        .accordion {
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .active, .accordion:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        .panel.show {
+            display: block;
+        }
+    </style>
+    <script>
+        function myFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+        }
+
+        function toggleAccordion(panelId) {
+            var panel = document.getElementById(panelId);
+            panel.classList.toggle("show");
+        }
+    </script>
+    <title>Móðurborð - Tölvur</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="page-title">Móðurborð</h1>
+        <!-- Popup container within the header -->
+        <div class="popup" onclick="myFunction()">&#9776; <!-- Hamburger icon -->
+            <ul class="sub-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Heim</a></li>
+                <li><a href="cpu.html"><i class="fas fa-microprocessor"></i> Örgjörvinn</a></li>
+                <li><a href="graphics-card.html"><i class="fas fa-video"></i> Skjákort</a></li>
+                <li><a href="ram.html"><i class="fas fa-memory"></i> RAM</a></li>
+                <li><a href="hard-drive.html"><i class="fas fa-hdd"></i> Harðdiskar</a></li>
+                <li><a href="ssd.html"><i class="fas fa-solid-state-drive"></i> SSD</a></li>
+                <li><a href="cooling-system.html"><i class="fas fa-fan"></i> Kælingarkerfi</a></li>
+                <li><a href="power-supply.html"><i class="fas fa-plug"></i> Alfgjafi</a></li>
+                <li><a href="computer-case.html"><i class="fas fa-desktop"></i> Tölvu kassi</a></li>
+                <li><a href="rgb-lights.html"><i class="fas fa-lightbulb"></i> RGB Ljós</a></li>
+            </ul>            
+            <span class="popuptext" id="myPopup">Popup text...</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="text-section">
+            <p>Móðurborðið (e. motherboard) er einn af helstu þáttum tölvu og gegnir hlutverki miðstöðvarinnar fyrir önnur tölvutæki. Það tengir saman öll hluta tölvunnar og stjórnar þeim, og er grundvallarþáttur í að gera tölvuna starfhæfa.</p>
+
+            <p>Tegundir móðurborða eru fjölmargar, enda margir framleiðendur, margar gerðir örgjörva, og mjög mismunandi tækni að baki hverri hönnun. Oftast eru þó móðurborð flokkuð saman eftir stærð. Móðurborðin eru hönnuð með tilliti til stærðar tölvukassans sem á að hýsa hann. Hér er samantekt á helstu stærðarflokkum:</p>
+
+            <ul>
+                <li class="accordion" onclick="toggleAccordion('accordionPanel1')">PC/XT</li>
+                <div class="panel" id="accordionPanel1">
+                    <p>PC/XT er upprunalegi opni staðallinn frá IBM fyrir fyrstu heimilistölvuna, IBM-PC. Hönnunin var klónuð ótal sinnum sökum opna staðalsins, og varð þetta því að de facto staðlinum fyrir móðurborð.</p>
+                </div>
+            </ul>
+        </div>
+
+        <div class="image-slideshow">
+            <div>
+                <img src="new motherboard 1.jpg" width="400" height="400" alt="">
+            </div>
+            <div>
+                <img src="motherbard 2.avif" width="400" height="400" alt="">
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

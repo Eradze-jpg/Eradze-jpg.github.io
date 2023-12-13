@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cooling-system.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="..." crossorigin="anonymous">
+    <style>
+        /* Popup container */
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* The actual popup (appears on top) */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #555 transparent;
+        }
+
+        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity:1 ;}
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: #333;
+            padding: 20px;
+            text-align: left;
+            position: relative; 
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            color: #FFFFFF;
+            margin-right: 20px;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .menu li {
+            margin-right: 20px;
+        }
+
+        .menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .sub-menu {
+            list-style: none;
+            padding: 10px;
+            position: absolute;
+            top: 100%; /* Position the submenu below the header */
+            left: 0;
+            background-color: #333;
+            display: none; /* Hide the submenu by default */
+        }
+
+        .sub-menu li {
+            margin: 5px 0;
+        }
+
+        .sub-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .header:hover .sub-menu {
+            display: block; /* Show the submenu when the header is hovered */
+        }
+
+        /* Accordion styles */
+        .accordion {
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .active, .accordion:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        .panel.show {
+            display: block;
+        }
+    </style>
+    <script>
+        function myFunction() {
+            var popup = document.querySelector(".popup");
+            popup.querySelector(".popuptext").classList.toggle("show");
+            var subMenu = popup.querySelector(".sub-menu");
+            subMenu.classList.toggle("show");
+        }
+
+        function toggleAccordion(panelId) {
+            var panel = document.getElementById(panelId);
+            panel.classList.toggle("show");
+        }
+    </script>
+    <title>Cooling System - Tölvur</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="page-title">Kælingarkerfi</h1>
+        <!-- Popup in the header -->
+        <div class="popup" onclick="myFunction()">&#9776; <!-- Hamburger icon -->
+            <ul class="sub-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Heim</a></li>
+                <li><a href="motherboard.html"><i class="fas fa-microchip"></i> Móðurborð</a></li>
+                <li><a href="cpu.html"><i class="fas fa-microprocessor"></i> Örgjörvinn</a></li>
+                <li><a href="graphics-card.html"><i class="fas fa-video"></i> Skjákort</a></li>
+                <li><a href="ram.html"><i class="fas fa-memory"></i> RAM</a></li>
+                <li><a href="hard-drive.html"><i class="fas fa-hdd"></i> Harðdiskar</a></li>
+                <li><a href="ssd.html"><i class="fas fa-solid-state-drive"></i> SSD</a></li>
+                <li><a href="power-supply.html"><i class="fas fa-plug"></i> Alfgjafi</a></li>
+                <li><a href="computer-case.html"><i class="fas fa-desktop"></i> Tölvu kassi</a></li>
+                <li><a href="rgb-lights.html"><i class="fas fa-lightbulb"></i> RGB Ljós</a></li>
+            </ul>            
+            <span class="popuptext" id="myPopup">Popup text...</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="text-section">
+            <p>
+                Kælikerfið í tölvu er nauðsynlegt til að halda hitastigi íhluta innan öruggra marka. Það eru ýmsar kælilausnir í boði, þar á meðal vatnskæling, AIO (All-In-One) kæling og viftukæling.
+            </p>
+            <!-- First Accordion -->
+            <button class="accordion" onclick="toggleAccordion('accordionPanel1')">Vatns kæling</button>
+            <div class="panel" id="accordionPanel1">
+                <p>
+                    Vatns kæling er háþróuð kæliaðferð sem notar lokað hringrásarkerfi til að dreifa vökva í gegnum hitaskáp og flytja varma frá íhlutum. Það er mjög skilvirkt og hentar fyrir yfirklukkun og afkastamikil kerfi.
+                </p>
+            </div>
+            <!-- Second Accordion -->
+            <button class="accordion" onclick="toggleAccordion('accordionPanel2')">AIO kæling</button>
+            <div class="panel" id="accordionPanel2">
+                <p>
+                    AIO kæling er þægileg lausn sem sameinar fljótandi kælikerfi í einni einingu. Það krefst lágmarks viðhalds og býður upp á skilvirka kælingu fyrir flest kerfi, sem gerir það að vinsælu vali meðal notenda.
+                </p>
+            </div>
+            <!-- Third Accordion -->
+            <button class="accordion" onclick="toggleAccordion('accordionPanel3')">Viftukæling</button>
+            <div class="panel" id="accordionPanel3">
+                <p>
+                    Viftukæling er hefðbundin kæliaðferð sem byggir á loftflæði. Það samanstendur af hitaköfum og viftum til að dreifa hita. Þó að það sé kannski ekki eins skilvirkt og fljótandi kæling, þá er það hagkvæmt og virkar vel fyrir margar uppsetningar.
+                </p>
+            </div>
+        </div>
+
+        <div class="image-section">
+            <div class="cooling-image">
+                <img src="water cooling.webp" alt="Vatns kæling">
+                <p>Vatns kæling</p>
+            </div>
+            <div class="cooling-image">
+                <img src="aio cooler.jpg" alt="AIO kæling">
+                <p>AIO kæling</p>
+            </div>
+            <div class="cooling-image">
+                <img src="air cooler.jpg" alt="viftu kæling">
+                <p>Viftu kæling</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function myFunction() {
+            var popup = document.querySelector(".popup");
+            popup.querySelector(".popuptext").classList.toggle("show");
+            var subMenu = popup.querySelector(".sub-menu");
+            subMenu.classList.toggle("show");
+        }
+
+        function toggleAccordion(panelId) {
+            var panel = document.getElementById(panelId);
+            panel.classList.toggle("show");
+        }
+    </script>
+</body>
+</html>

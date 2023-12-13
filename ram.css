@@ -1,0 +1,85 @@
+/* Style for the header section */
+.header {
+    background-color: #333;
+    padding: 20px;
+    text-align: left;
+}
+
+.page-title {
+    font-size: 48px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+/* Style for the main content section */
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Style for the text section */
+.text-section {
+    width: 45%;
+    padding: 20px;
+    font-size: 20px;
+}
+
+/* Style for the image section */
+.image-section {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for RAM images */
+.ram-image {
+    margin: 10px 0;
+}
+
+.ram-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.image-slideshow {
+	width: 640px;
+    height: 480px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0;
+    position: relative;
+}
+.image-slideshow > div {
+	width: 640px;
+    height: 480px;
+	animation: move 15s ease-in-out 2s infinite alternate;
+    display:inline-block;
+}
+.image-slideshow > div div {
+	position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    width: 100%;
+}
+.image-slideshow h2 {
+	padding: 15px;
+    margin: 0;
+    font-size: 18px;
+    color: #f9f9f9;
+}
+.image-slideshow p {
+	padding: 0 15px 15px 15px;
+    margin: 0;
+    font-size: 14px;
+    color: #dddddd;
+}
+@keyframes move {
+	0%,30% { transform: translateX(0); }
+   	40%,70% { transform: translateX(-640px); }
+}
