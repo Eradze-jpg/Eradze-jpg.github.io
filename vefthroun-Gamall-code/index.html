@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="..." crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Splash screen styles */
+        .splash-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #111;
+            z-index: 9999;
+        }
+
+        .loader {
+            width: 200px;
+            height: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .load-bar {
+            height: 100%;
+            width: 0;
+            background-color: #4caf50;
+            border-radius: 10px;
+            animation: fillLoader 3s ease-in-out forwards;
+        }
+
+        @keyframes fillLoader {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        .content {
+            display: none;
+        }
+
+        /* Popup container */
+        .popup {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* The actual popup (appears on top) */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #555 transparent;
+        }
+
+        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: #333;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 10;
+            position: relative; 
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            color: #FFFFFF;
+            margin-right: 20px;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .menu li {
+            margin-right: 20px;
+        }
+
+        .menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .sub-menu {
+            list-style: none;
+            padding: 10px; 
+            position: absolute;
+            top: 100%; 
+            left: 0;
+            background-color: #333;
+            display: none; 
+        }
+
+        .sub-menu li {
+            margin: 5px 0;
+        }
+
+        .sub-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .header:hover .sub-menu {
+            display: block; 
+        }
+
+        /* Chatbox styles */
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chatbox-header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .chatbox-body {
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .chatbox-input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .sale-popup {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+    <script>
+        // Simulate loading time (you can replace this with actual loading logic)
+        setTimeout(function() {
+            document.querySelector('.splash-screen').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+        }, 3000); // 3 seconds as per the animation duration
+
+        // Function to toggle the popup
+        function togglePopup() {
+            var popup = document.querySelector(".popup");
+            var salePopup = document.querySelector(".sale-popup");
+
+            // Toggle visibility of the popup
+            popup.querySelector(".popuptext").classList.toggle("show");
+
+            // Display sale popup
+            salePopup.style.display = "block";
+        }
+
+        // Close the sale popup when clicked
+        function closeSalePopup() {
+            var salePopup = document.querySelector(".sale-popup");
+            salePopup.style.display = "none";
+        }
+
+        // Function to show the sale popup when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            var salePopup = document.querySelector(".sale-popup");
+            salePopup.style.display = "block";
+        });
+    </script>
+    <title>Tölvur</title>
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <div class="loader">
+            <div class="load-bar"></div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+        <header class="header">
+            <div class="container">
+                <div class="logo-container">
+                    <h1 class="logo">Tölvur</h1>
+                    <nav>
+                        <ul class="menu">
+                            <li><a href="Um-Okkur.html">Um Okkur</a></li>
+                            <li><a href="samband.html">Hafa Samband</a></li>
+                            <li><a href="skrainn.html">Skrá inn</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Popup container within the grey border -->
+                <div class="popup" onclick="togglePopup()">&#9776; <!-- Hamburger icon -->
+                    <ul class="sub-menu">
+                        <li><a href="motherboard.html"><i class="fas fa-microchip"></i> Móðurborð</a></li>
+                        <li><a href="cpu.html"><i class="fas fa-microprocessor"></i> Örgjörvinn</a></li>
+                        <li><a href="graphics-card.html"><i class="fas fa-video"></i> Skjákort</a></li>
+                        <li><a href="ram.html"><i class="fas fa-memory"></i> RAM</a></li>
+                        <li><a href="hard-drive.html"><i class="fas fa-hdd"></i> Harðdiskar</a></li>
+                        <li><a href="ssd.html"><i class="fas fa-solid-state-drive"></i> SSD</a></li>
+                        <li><a href="cooling-system.html"><i class="fas fa-fan"></i> Kælingarkerfi</a></li>
+                        <li><a href="power-supply.html"><i class="fas fa-plug"></i> Alfgjafi</a></li>
+                        <li><a href="computer-case.html"><i class="fas fa-desktop"></i> Tölvu kassi</a></li>
+                        <li><a href="rgb-lights.html"><i class="fas fa-lightbulb"></i> RGB Ljós</a></li>
+                    </ul>
+                    <span class="popuptext" id="myPopup"></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sale Popup -->
+        <div class="sale-popup" onclick="closeSalePopup()">
+            <p>Svartur fössari! Afsláttur á tölvu íhluti!!</p>
+        </div>
+
+        <!-- Chatbox HTML -->
+        <div class="chatbox">
+            <div class="chatbox-header">Chat</div>
+            <div class="chatbox-body" id="chatbox-body">
+                <!-- Chat messages go here -->
+            </div>
+            <input type="text" class="chatbox-input" placeholder="Type your message..." id="chatbox-input" onkeyup="sendMessage(event)">
+        </div>
+
+        <div class="container">
+            <h2>Computer Parts Stock</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parts</th>
+                        <th>In Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Motherboard</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>PSU</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>GPU</td>
+                        <td>57</td>
+                    </tr>
+                    <tr>
+                        <td>SSD</td>
+                        <td>68</td>
+                    </tr>
+                    <tr>
+                        <td>M.2 SSD</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>HDD</td>
+                        <td>67</td>
+                    </tr>
+                    <tr>
+                        <td>RAM</td>
+                        <td>78</td>
+                    </tr>
+                    <tr>
+                        <td>RGB strips</td>
+                        <td>87</td>
+                    </tr>
+                    <tr>
+                        <td>RGB Fans</td>
+                        <td>120</td>
+                    </tr>
+                    <tr>
+                        <td>Fan coolers</td>
+                        <td>130</td>
+                    </tr>
+                    <tr>
+                        <td>AIO Coolers</td>
+                        <td>120</td>
+                    </tr>
+                    <tr>
+                        <td>Water cooling pumps</td>
+                        <td>110</td>
+                    </tr>
+                    <tr>
+                        <td>Water cooling tubes</td>
+                        <td>110</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>
